@@ -16,6 +16,18 @@ jobs:
           if [ -f pubspec.yaml ]; then APP_DIR=.; else APP_DIR=hr_app; fi
           cd $APP_DIR
           flutter create --platforms=android --project-name hr_company_app --org com.company.hr .
+          
+          echo "--- Fix Kotlin 1.7.1 -> 1.9.22 ---"
+          # للمشاريع الجديدة Flutter 3.19+
+          if [ -f android/settings.gradle ]; then
+            sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.22"/g' android/settings.gradle
+          fi
+          # للمشاريع القديمة
+          if [ -f android/build.gradle ]; then
+            sed -i "s/ext.kotlin_version.*/ext.kotlin_version = '1.9.22'/g" android/build.gradle
+          fi
+          cat android/settings.gradle
+          
           flutter pub get
           flutter build apk --release
       - name: Upload APK
