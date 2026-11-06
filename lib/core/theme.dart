@@ -12,5 +12,5 @@ ThemeData buildTheme({required bool dark, required String lang}) {
   return base.copyWith(colorScheme: scheme, textTheme: textTheme,
     appBarTheme: base.appBarTheme.copyWith(centerTitle: true),
     navigationBarTheme: NavigationBarThemeData(labelTextStyle: WidgetStateProperty.all(const TextStyle(fontSize: 11))),
-    cardTheme: const CardThemeData(margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6)));
+    cardTheme: const CardTheme(margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6)));
 }
